@@ -1,11 +1,11 @@
 class State:
     def __init__(self, m, c, b):
-        self.m = m  # number of missionaries on left side
-        self.c = c  # number of cannibals on left side
-        self.b = b  # 1 if boat is on left side, 0 if on right side
+        self.m = m  
+        self.c = c  
+        self.b = b  
 
     def __repr__(self):
-        return f"{self.m}M-{self.c}C-{self.b}B"
+        return f"{self.m} Missionaries - {self.c} Cannibals - {self.b} Boat"
 
     def is_goal(self):
         return self.m == 0 and self.c == 0
@@ -63,20 +63,23 @@ def dfs(start, goal):
                 frontier.append(new_path)
 
     return None
-
-start_state = State(3, 3, 1)
+print("----Missionaries Cannibals Problem----")
+m=int(input("Enter the number of missionaries:"))
+c= int(input("Enter the number of cannibals:"))
+b= int(input("Enter the side of the river where the boat is present(0 for left,1 for right):"))
+start_state = State(m, c, b)
 goal_state = State(0, 0, 0)
 solution = dfs(start_state, goal_state)
 
 if solution is None:
     print("No solution found!")
 else:
-    print("Solution found:")
+    print("Solution:")
     for i, state in enumerate(solution):
         if i == 0:
-            print(f"Step {i+1}: Initial State is {state}")
+            print(f"Step {i+1}: Initial State : \n {state}")
         elif i == len(solution)-1:
-            print(f"Step {i+1}: Reached Goal State {state}")
+            print(f"Step {i+1}: Goal State Achieved... \n {state}")
         elif state.b == 0:
             print(f"Step {i+1}: {state}")
         else:
